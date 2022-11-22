@@ -30,23 +30,20 @@ def predict():
     parity = request.form.get('parity')
     feeding = request.form.get('feeding')
     educ1_hh = request.form.get('educ1_hh')
-     
-   
+
     input_query_underweight = np.array([[bw_grams,wdrinking,psoc_hh,age_child,age_hh,educ_mom]])
     input_query_wasting = np.array([[bw_grams,wdrinking,parity,age_child,psoc_hh,educ_mom]])  
     input_query_stunting = np.array([[bw_grams,wdrinking,parity,age_child,psoc_hh,educ_mom]])
     input_query_overweight = np.array([[bw_grams,age_hh,psoc_hh,feeding,educ1_hh]])
-     
- 
     prediction_underweight = underweight_model.predict(input_query_underweight)[0]
     prediction_wasting = wasting_model.predict(input_query_wasting)[0]
     prediction_stunting = stunting_model.predict(input_query_stunting)[0]
     prediction_overweight = overweight_model.predict(input_query_overweight)[0]
         
     if prediction_underweight == 0: 
-        prediction_underweight =  ('Normal')
+        prediction_underweight = ('Normal')
     else:
-        prediction_underweight = ('Underweight')
+        prediction_underweight =('Underweight')
     if prediction_wasting == 0 and prediction_overweight == 1: 
         prediction_wasting = ('Overweight')
     elif prediction_wasting == 1 and prediction_overweight == 0:
@@ -57,7 +54,7 @@ def predict():
         prediction_wasting =  ('Invalid')
         
     if prediction_stunting == 0: 
-        prediction_stunting =  ('Normal')
+        prediction_stunting = ('Normal')
     else:
         prediction_stunting = ('Stunted')
 
